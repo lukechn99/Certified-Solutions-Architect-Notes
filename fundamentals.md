@@ -1,5 +1,5 @@
 # Fundamentals
----
+
 ## EC2 & IAM
 
 ### EC2
@@ -35,12 +35,20 @@ use wither PuTTy or SSH to access the EC2
 standard operating procedure is then to use  
 ```
 $ sudo su  
-$yum update -y
+$ yum update -y
+$ yum install -y httpd.x86_64
 ```  
-to enter sudo mode and update the dependencies with automatic 'yes' response to confirmations
+to enter sudo mode and update the dependencies with automatic 'yes' response to confirmations, and installs httpd  
+to start the service and enable across reboots, use  
+```
+$ systemctl start httpd.service
+$ systemctl enable httpd.service
+```
+note than an error 'bash:systemctl: command not found' means you're using Amazon Linux and not Amazon Linux 2
+typically, you need to open up port 80 TCP in order to use Apache to allow HTTP traffic
 
 # High Availability and Scalability: ELB & ASG
----
+
 
 # Troubleshooting
 if you cannot connect, it is usually a security group issue  
