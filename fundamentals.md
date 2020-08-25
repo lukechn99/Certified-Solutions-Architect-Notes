@@ -47,6 +47,14 @@ $ systemctl enable httpd.service
 note than an error 'bash:systemctl: command not found' means you're using Amazon Linux and not Amazon Linux 2
 typically, you need to open up port 80 TCP in order to use Apache to allow HTTP traffic
 
+***Test it out***
+```
+# echo "Hello World" > /var/www/html/index.html
+# echo "Hello World from $(hostname -f)" > /var/www/html/index.html
+```
+this would put the hellow world text at the index of the IP, so when you visit the IP address by accessing it from your browser, 
+it will show hello world.
+
 # High Availability and Scalability: ELB & ASG
 
 
