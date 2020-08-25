@@ -18,6 +18,7 @@ regardless of IP, if two EC2 instances have the same security group attached, th
 one EC2 can have multiple security groups so that it can connect to EC2s with different security groups  
 
 ### IP
+---
 IPv4 vs. IPv6
 IPv6 is less common, mostly used for IoT
 IPv4 allows for 3.7 billion addresses, which is running out
@@ -29,8 +30,9 @@ EC2 instances have ___both___ private IP for AWS resources and a public one, for
 computer using the public IP, but once inside it uses the private IP
 every time we 'stop' and restart our EC2 instance, ***the public IP address changes***  
 to prevent this from happening, you can create an elastic IP and associate it with the EC2
-
+---
 ### Apache
+---
 use wither PuTTy or SSH to access the EC2  
 standard operating procedure is then to use  
 ```
@@ -52,8 +54,23 @@ typically, you need to open up port 80 TCP in order to use Apache to allow HTTP 
 # echo "Hello World" > /var/www/html/index.html
 # echo "Hello World from $(hostname -f)" > /var/www/html/index.html
 ```
-this would put the hellow world text at the index of the IP, so when you visit the IP address by accessing it from your browser, 
+this would put the hello world text at the index of the IP, creating a hello world page, so when you visit the IP address by accessing it from your browser, 
 it will show hello world.
+---
+
+### EC2 User Data and Bootstrap
+---
+bootstrapping is basically a script you want to run at the beginning of boot  
+from console, during EC2 creation, under 'configure instance' you will find 'User data' in the advanced details section  
+an eample of a script you can use is:  
+```
+#!/bin/bash
+# install httpd (Linux 2 version)
+yum update -y
+yum install -y httpd.x86_64
+systemctl start httpd.service
+systemctl enable httpd.service
+```
 
 # High Availability and Scalability: ELB & ASG
 
